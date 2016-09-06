@@ -66,7 +66,7 @@ ajaxform:function(formname, url, success, error) {
 	XMLHttpReq.addEventListener("abort", function(){error("提交被取消,status:"+XMLHttpReq.status);}, false);
 	XMLHttpReq.open("post", url, true);
 	XMLHttpReq.onreadystatechange = function () {
-	if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {success(XMLHttpReq.responseText);}};
+	if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {success(WITJSON.parse(XMLHttpReq.responseText));}};
 	XMLHttpReq.send(form);
 	//form.remove();
 },
@@ -88,14 +88,80 @@ ajaxmap:function(map,url,success,error)
 		 
 	}
 	var XMLHttpReq = new XMLHttpRequest();
-	//XMLHttpReq.upload.onprogress = updateProgress;
-	//XMLHttpReq.addEventListener("load", function(){}, false);
 	XMLHttpReq.addEventListener("error", function(){error("提交出错，请检查网址或者参数是否都正确,status:"+XMLHttpReq.status);}, false);
 	XMLHttpReq.addEventListener("abort", function(){error("提交被取消,status:"+XMLHttpReq.status);}, false);
 	XMLHttpReq.open("post", url, true);
 	XMLHttpReq.onreadystatechange = function () {
-	if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {success(XMLHttpReq.responseText);}};
+	if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {success(WITJSON.parse(XMLHttpReq.responseText));}};
 	XMLHttpReq.send(form);
+},
+ajaxmapget:function(map,url,success,error)
+{
+	var array = map.keySet();
+	var params="";
+	 for(var i=0;i<array.length;i++)
+	 {
+		 if(typeof map.get(array[i])!="object")
+		 {
+			 if(params=="")
+			 {
+				params=array[i]+"="+map.get(array[i]); 
+			 }
+			 else
+			 {
+				 params=params+"&"+array[i]+"="+map.get(array[i]);
+			 }
+		 }
+		 else
+		 {
+			 if(params=="")
+			 {
+				params=array[i]+"="+WITJSON.stringify(map.get(array[i])); 
+			 }
+			 else
+			 {
+				 params=params+"&"+array[i]+"="+WITJSON.stringify(map.get(array[i]));
+			 }
+		 } 
+	}
+	var XMLHttpReq = new XMLHttpRequest();
+	XMLHttpReq.addEventListener("error", function(){error("提交出错，请检查网址或者参数是否都正确,status:"+XMLHttpReq.status);}, false);
+	XMLHttpReq.addEventListener("abort", function(){error("提交被取消,status:"+XMLHttpReq.status);}, false);
+	XMLHttpReq.open("post", url, true);
+	XMLHttpReq.onreadystatechange = function () {
+	if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {success(WITJSON.parse(XMLHttpReq.responseText));}};
+	XMLHttpReq.send(params);
+},
+maptourlparams:function(map)
+{
+	var array = map.keySet();
+	var params="";
+	 for(var i=0;i<array.length;i++)
+	 {
+		 if(typeof map.get(array[i])!="object")
+		 {
+			 if(params=="")
+			 {
+				params=array[i]+"="+map.get(array[i]); 
+			 }
+			 else
+			 {
+				 params=params+"&"+array[i]+"="+map.get(array[i]);
+			 }
+		 }
+		 else
+		 {
+			 if(params=="")
+			 {
+				params=array[i]+"="+WITJSON.stringify(map.get(array[i])); 
+			 }
+			 else
+			 {
+				 params=params+"&"+array[i]+"="+WITJSON.stringify(map.get(array[i]));
+			 }
+		 } 
+	}
+	return params;
 },
 encodebase64:function (input) {
 	var output = "";
