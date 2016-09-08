@@ -1,14 +1,21 @@
-<html>
+
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>WITAJAX库 V1.0.2</title>
 </head>
 <body>
-<code class="language-javascript">普通form表单式提交</code>
-</br>
-<code class="language-javascript">WITAJAX.ajaxform(form,url,success,error)</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
+<section id="WITAJAX.ajaxform">
+<div id="limit" class="style2">普通form表单式提交(post)</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
+<code class="language-javascript">WITAJAX.ajaxform(formname,url,success,error)</code>
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -17,7 +24,7 @@
   <th width="24%">描述</th>
 </tr>
 <tr class="altblank">
-  <td>form</td>
+  <td>formname</td>
   <td align="center"><span style="color:#FF8000">是</span></td>
   <td align="center">string</td>
   <td>表单名称</td>
@@ -41,6 +48,12 @@
  	<td>失败回调函数</td>
 </tr>
 <tr class="altblank">
+    <td>返回值</td>
+    <td align="center"></td>
+    <td align="center">Object</td>
+ 	<td>json对象</td>
+</tr>
+<tr class="alt">
   <td>示例代码</td>
 </tr>
 <tr class="altblank">
@@ -51,9 +64,9 @@
 &lt;input type="text" value="我不会被提交到服务器，因为没有id值和name值"/&gt;
 &lt;/form&gt;
 &lt;script&gt;
-    var form="myform";
-    var url="http://***.***.***.***/login.do";
-    WITAJAX.ajaxform("myform",url,success,error);
+    var formname="myform";
+    var url="http://121.43.233.185/mavenwitlinkweb/user/login.do";
+    WITAJAX.ajaxform(formname,url,success,error);
     
     //提交成功
     function success()
@@ -70,13 +83,18 @@
 	</td>
 </tr>
 </table>
+</section>
 <br>
-<code class="language-javascript">键值式提交(key-value)</code>
-</br>
+<section id="WITAJAX.ajaxmap">
+<div id="limit" class="style2">键值式提交(key-value)(post)</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
 <code class="language-javascript">WITAJAX.ajaxmap(map,url,success, error)</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
-
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -109,12 +127,18 @@
  	<td>失败回调函数</td>
 </tr>
 <tr class="altblank">
+    <td>返回值</td>
+    <td align="center"></td>
+    <td align="center">Object</td>
+ 	<td>json对象</td>
+</tr>
+<tr class="alt">
   <td>示例代码</td>
 </tr>
 <tr class="altblank">
 	<td>
 <pre class="line-numbers"><code class="language-javascript">&lt;script&gt;
-    var url="http://***.***.***.***/login.do";
+    var url="http://121.43.233.185/mavenwitbrowser/ajax/get.do";
     var map = new Map();
     map.put("userphone",15990717885);
     map.put("userpassword","123456");
@@ -135,13 +159,94 @@
 	</td>
 </tr>
 </table>
+</section>
 <br>
-<code class="language-javascript">创建键值(Map)</code>
-</br>
+<section id="WITAJAX.ajaxmapget">
+<div id="limit" class="style2">键值式提交(key-value)(get)</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
+<code class="language-javascript">WITAJAX.ajaxmapget(map,url,success, error)</code>
+</div>
+<div class="style3">参数列表</div>
+<table id="customers">
+<tr >
+  <th width="30%">参数名</th>
+  <th width="11%">必选</th>
+  <th width="15%">类型</th>
+  <th width="24%">描述</th>
+</tr>
+<tr class="altblank">
+  <td>map</td>
+  <td align="center"><span style="color:#FF8000">是</span></td>
+  <td align="center">Map</td>
+  <td >map 键值列表</td>
+</tr>
+<tr class="alt">
+    <td>url</td>
+    <td align="center"><span style="color:#FF8000">是</span></td>
+    <td align="center">string</td>
+ 	<td>服务器url地址</td>
+</tr>
+<tr class="altblank">
+  <td>success</td>
+  <td align="center"><span style="color:#FF8000">是</span></td>
+  <td align="center">function</td>
+  <td>成功回调函数</td>
+</tr>
+<tr class="alt">
+    <td>error</td>
+    <td align="center"><span style="color:#FF8000">是</span></td>
+    <td align="center">function</td>
+ 	<td>失败回调函数</td>
+</tr>
+<tr class="altblank">
+    <td>返回值</td>
+    <td align="center"></td>
+    <td align="center">Object</td>
+ 	<td>json对象</td>
+</tr>
+<tr class="alt">
+  <td>示例代码</td>
+</tr>
+<tr class="altblank">
+	<td>
+<pre class="line-numbers"><code class="language-javascript">&lt;script&gt;
+    var url="http://121.43.233.185/mavenwitlinkweb/user/login.do";
+    var map = new Map();
+    map.put("userphone",15990717885);
+    map.put("userpassword","123456");
+    WITAJAX.ajaxmapget(map,url,success,error);
+    
+    //提交成功
+    function success()
+    {
+        alert(arguments[0]);
+    }
+    //提交失败
+    function error()
+    {
+        alert(arguments[0]);
+    }
+&lt;/script&gt;</code>
+</pre>
+	</td>
+</tr>
+</table>
+</section>
+<br>
+<section id="WITAJAX.createmap">
+<div id="limit" class="style2">创建键值对</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
 <code class="language-javascript">new Map()</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
-
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -169,12 +274,16 @@
 </table>
 </section>
 <br>
-<code class="language-javascript">BASE64编码</code>
-</br>
+<section id="WITAJAX.encodebase64">
+<div id="limit" class="style2">BASE64编码</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
 <code class="language-javascript">WITAJAX.encodebase64(input)</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
-
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -201,14 +310,18 @@ alert(base64);
 	</td>
 </tr>
 </table>
-
+</section>
 <br>
-<code class="language-javascript">BASE64解码</code>
-</br>
+<section id="WITAJAX.decodebase64">
+<div id="limit" class="style2">BASE64解码</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
 <code class="language-javascript">WITAJAX.decodebase64();</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
-
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -235,12 +348,18 @@ alert(witweb);
 	</td>
 </tr>
 </table>
-<br>
-<code class="language-javascript">字符串转json对象</code>
-</br>
+</section>
+<br />
+<section id="WITJSON.parse">
+<div id="limit" class="style2">字符串转json对象</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
 <code class="language-javascript">WITJSON.parse(text,reviver)</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -279,7 +398,7 @@ alert(witweb);
 "per":{"name":"李天静","age":30}}'; 
 
 	//普通式调用
-    var contact = JSON.parse(jsontext); 
+    var contact = WITJSON.parse(jsontext); 
     var companyname=contact.companyname;
 	var address=contact.address;
 	var per=contact.per;
@@ -299,13 +418,18 @@ alert(witweb);
 	</td>
 </tr>
 </table>
+</section>
 <br>
-<br>
-<code class="language-javascript">json对象转字符串</code>
-</br>
+<section id="WITJSON.stringify">
+<div id="limit" class="style2">json对象转字符串</div>
+<div class="style3">请求方式：透明调用</div>
+<div class="style3">请求频率：无限制</div>
+<div class="style3">支持系统：FireFox,Mozillar,opera,safari,IE7以上</div>
+<div class="style3">接口方法：</div>
+<div class="style3">
 <code class="language-javascript">WITJSON.stringify(value,replacer,space)</code>
-</br>
-<code class="language-javascript">支持系统：FireFox,Mozillar,opera,safari,IE7以上</code>
+</div>
+<div class="style3">参数列表</div>
 <table id="customers">
 <tr >
   <th width="30%">参数名</th>
@@ -367,5 +491,6 @@ alert(witweb);
 	</td>
 </tr>
 </table>
+</section>
 </body>
 </html>
