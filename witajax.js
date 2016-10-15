@@ -458,6 +458,7 @@ if (typeof WITJSON !== "object") {
                 return reviver.call(holder, key, value)
             }
             text = String(text);
+			/*
 				var str=text.split(":");      
 				for (var i=0;i<str.length ;i++ )   
 				{   var str2=str[i].split(",");
@@ -481,6 +482,7 @@ if (typeof WITJSON !== "object") {
 						}
 					}
 				}  
+				*/
             rx_dangerous.lastIndex = 0;
             if (rx_dangerous.test(text)) {
                 text = text.replace(rx_dangerous, function (a) {
