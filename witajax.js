@@ -127,10 +127,10 @@ ajaxmapget:function(map,url,success,error)
 	var XMLHttpReq = new XMLHttpRequest();
 	XMLHttpReq.addEventListener("error", function(){error("提交出错，请检查网址或者参数是否都正确，以及是否被禁止跨域,status:"+XMLHttpReq.status);}, false);
 	XMLHttpReq.addEventListener("abort", function(){error("提交被取消,status:"+XMLHttpReq.status);}, false);
-	XMLHttpReq.open("post", url, true);
+	XMLHttpReq.open("get", url+"?"+params, true);
 	XMLHttpReq.onreadystatechange = function () {
 	if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {success(WITJSON.parse(XMLHttpReq.responseText));}};
-	XMLHttpReq.send(params);
+	XMLHttpReq.send(null);
 },
 maptourlparams:function(map)
 {
@@ -499,3 +499,89 @@ if (typeof WITJSON !== "object") {
         }
     }
 }());
+Date.prototype.Format = function(fmt)  
+{ 
+ var o = {  
+  "M+" : this.getMonth()+1,           
+  "d+" : this.getDate(),            
+  "h+" : this.getHours(),            
+  "m+" : this.getMinutes(),         
+  "s+" : this.getSeconds(),           
+  "q+" : Math.floor((this.getMonth()+3)/3),  
+  "S" : this.getMilliseconds()         
+ };  
+ if(/(y+)/.test(fmt))  
+  fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));  
+ for(var k in o)  
+  if(new RegExp("("+ k +")").test(fmt))  
+ fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));  
+ return fmt;  
+}
+
+String.prototype.Trim = function() 
+{ 
+return this.replace(/^\s+/g,"").replace(/\s+$/g,""); 
+} 
+String.prototype.left = function (length_) 
+{
+	return this.substring(0,length_);
+}
+String.prototype.right = function (length_)  
+{  
+	var _from = this.length - length_;  
+	if (_from < 0) _from = 0;  
+	return this.substring(this.length - length_, this.length);  
+}; 
+function WITCookie() 
+{ 
+	this.GetCookie = function(key) 
+	{ 
+	var cookie = document.cookie; 
+	var cookieArray = cookie.split(';'); 
+	var getvalue = ""; 
+	for(var i = 0;i<cookieArray.length;i++) 
+	{ 
+	if(cookieArray[i].Trim().substr(0,key.length) == key) 
+	{ 
+	getvalue = cookieArray[i].Trim().substr(key.length + 1); 
+	break; 
+	} 
+	} 
+	return getvalue; 
+	}; 
+	this.GetChild = function(cookiekey,childkey) 
+	{ 
+	var child = this.GetCookie(cookiekey); 
+	var childs = child.split('&'); 
+	var getvalue = ""; 
+	for(var i = 0;i < childs.length;i++) 
+	{ 
+	if(childs[i].Trim().substr(0,childkey.length) == childkey) 
+	{ 
+	getvalue = childs[i].Trim().substr(childkey.length + 1); 
+	break; 
+	} 
+	} 
+	return getvalue; 
+	}; 
+	this.SetCookie = function(key,value,expire,domain,path) 
+	{ 
+	var cookie = ""; 
+	if(key != null && value != null) 
+	cookie += key + "=" + value + ";"; 
+	if(expire != null) 
+	cookie += "expires=" + expire.toGMTString() + ";"; 
+	if(domain != null) 
+	cookie += "domain=" + domain + ";"; 
+	if(path != null) 
+	cookie += "path=" + path + ";"; 
+	document.cookie = cookie; 
+	}; 
+	this.Expire = function(key) 
+	{ 
+	expire_time = new Date(); 
+	expire_time.setFullYear(expire_time.getFullYear() - 1); 
+	var cookie = " " + key + "=e;expires=" + expire_time + ";" 
+	document.cookie = cookie; 
+	} 
+}
