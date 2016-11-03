@@ -458,31 +458,9 @@ if (typeof WITJSON !== "object") {
                 return reviver.call(holder, key, value)
             }
             text = String(text);
-			/*
-				var str=text.split(":");      
-				for (var i=0;i<str.length ;i++ )   
-				{   var str2=str[i].split(",");
-					for(var z=0;z<str2.length;z++)
-					{
-						if(str2[z].indexOf('"')<0&&str2[z].toString().length>16) 
-						{
-							if(str2[z].indexOf('}')>0)
-							{
-								text=text.replace(str2[z],'"'+str2[z].replace("}","")+'"}');
-							}
-							else if(str2[z].indexOf(']')>0)
-							{
-								text=text.replace(str2[z],'"'+str2[z].replace("]","")+'"]');
-							}
-							else
-							{
-								text=text.replace(str2[z],'"'+str2[z]+'"');
-							}
-							
-						}
-					}
-				}  
-				*/
+			while (text.search(/[^"]\d{16}\d*[,\]\}]/g) >= 0) {
+            text = text.replace(/(:)(\d{16}\d*)/g,':\"$2\"');
+        	}
             rx_dangerous.lastIndex = 0;
             if (rx_dangerous.test(text)) {
                 text = text.replace(rx_dangerous, function (a) {
